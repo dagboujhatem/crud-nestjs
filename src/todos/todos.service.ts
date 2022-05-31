@@ -12,23 +12,23 @@ export class TodosService {
 
   }
 
-  create(createTodoDto: CreateTodoDto) {
-    return 'This action adds a new todo';
+  async create(createTodoDto: CreateTodoDto): Promise<Todo> {
+    return this.toDoModel.create(createTodoDto);
   }
 
   async findAll(): Promise<Todo[]> {
     return this.toDoModel.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} todo`;
+  async findOne(id: string): Promise<Todo> {
+    return this.toDoModel.findById(id);
   }
 
-  update(id: number, updateTodoDto: UpdateTodoDto) {
-    return `This action updates a #${id} todo`;
+  async update(id: string, updateTodoDto: UpdateTodoDto): Promise<Todo> {
+    return this.toDoModel.findByIdAndUpdate(id, updateTodoDto, {new: true});
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} todo`;
+  async remove(id: string): Promise<Todo> {
+    return this.toDoModel.findByIdAndDelete(id);
   }
 }
